@@ -13,3 +13,7 @@ Build
 /build
 /_build
 /subprojects
+
+.idea/
+cmake-build-debug/
+android_arm64/
