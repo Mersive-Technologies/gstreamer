@@ -22,15 +22,6 @@ RUN git clone https://gitlab.freedesktop.org/gstreamer/cerbero && \
 RUN apt-get install -y nano
 
 RUN cd cerbero && \
-    echo "        self.append_env('LDFLAGS', '-fPIE')\n" >> recipes/gstreamer-1.0.recipe && \
-    echo "        self.append_env('CFLAGS', '-fPIE')\n" >> recipes/gstreamer-1.0.recipe && \
-    echo "        self.append_env('CXXFLAGS', '-fPIE')\n" >> recipes/gstreamer-1.0.recipe
-    # ./cerbero-uninstalled -c config/cross-android-arm64.cbc build gstreamer-1.0
-    # Nougat
-
-# RUN git clone https://gitlab.freedesktop.org/gstreamer/gst-build.git && \
-#     cd gst-build && \
-#     meson build && \
-#     cd build && \
-#     ninja
+    sed -i.bak -e 's/-Wl,-dynamic-linker,\/system\/bin\/linker//g' /cerbero/config/android.config && \
+    ./cerbero-uninstalled -c config/cross-android-arm64.cbc build gstreamer-1.0
 
